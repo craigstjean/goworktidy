@@ -17,3 +17,7 @@ You can run `go mod edit -replace module=../path` in each subproject to allow
 
 `goworktidy` will run identify all modules in your `go.work`, then identify
 which subprojects are missing replace declarations, and add them.
+
+# TODO
+
+- [ ] Add indirect replacements for dependencies of dependencies
