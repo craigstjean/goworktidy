@@ -51,13 +51,18 @@ func readGoModReplacements(path string, module string) (map[string]string, error
 	return replacements, nil
 }
 
-func addGoModReplacement(path string, module string, old string, new string) error {
-	mod, err := readGoMod(path, module)
+func addGoModReplacement(path string, modulePath string, old string, newPath string, direct bool) error {
+	mod, err := readGoMod(path, modulePath)
 	if err != nil {
 		return err
 	}
 
-	err = mod.AddReplace(old, "", new, "")
+    newVersion := ""
+    if !direct {
+        newVersion = "// indirect"
+    }
+
+	err = mod.AddReplace(old, "", newPath, newVersion)
 	if err != nil {
 		return err
 	}
@@ -68,7 +73,7 @@ func addGoModReplacement(path string, module string, old string, new string) err
 		return err
 	}
 
-	fullpath := filepath.Join(path, module, "go.mod")
+	fullpath := filepath.Join(path, modulePath, "go.mod")
 	err = os.WriteFile(fullpath, data, 0644)
 	return err
 }

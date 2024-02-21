@@ -20,4 +20,6 @@ which subprojects are missing replace declarations, and add them.
 
 # TODO
 
-- [ ] Add indirect replacements for dependencies of dependencies
+- [X] Add indirect replacements for dependencies of dependencies
+- [ ] Add require blocks similar to go mod tidy
+
